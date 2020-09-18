@@ -19,7 +19,7 @@ public class Job {
 
     public Job() {
         id = nextId;
-        nextId ++;
+        nextId++;
     }
 
     public Job(String name, Employer employer, Location location, PositionType positionType, CoreCompetency coreCompetency) {
@@ -64,7 +64,9 @@ public class Job {
     }
 
     public Employer getEmployer() {
-        return employer;
+        if (this.employer.getValue().equals(""))
+            this.employer.setValue("Data not available");
+        return this.employer;
     }
 
     public void setEmployer(Employer employer) {
@@ -72,7 +74,9 @@ public class Job {
     }
 
     public Location getLocation() {
-        return location;
+        if (location.getValue().equals(""))
+            location.setValue("Data not available");
+        return this.location;
     }
 
     public void setLocation(Location location) {
@@ -80,7 +84,9 @@ public class Job {
     }
 
     public PositionType getPositionType() {
-        return positionType;
+        if (positionType.getValue().equals(""))
+            positionType.setValue("Data not available");
+        return this.positionType;
     }
 
     public void setPositionType(PositionType positionType) {
@@ -88,10 +94,30 @@ public class Job {
     }
 
     public CoreCompetency getCoreCompetency() {
-        return coreCompetency;
+        if (coreCompetency.getValue().equals(""))
+            coreCompetency.setValue("Data not available");
+        return this.coreCompetency;
     }
 
     public void setCoreCompetency(CoreCompetency coreCompetency) {
         this.coreCompetency = coreCompetency;
     }
+
+    @Override
+    public String toString() {
+
+        if (this.getName().equals("") && this.getEmployer().getValue().equals("Data not available") && this.getEmployer().getValue().equals("Data not available") && this.getLocation().getValue().equals("Data not available") && this.getPositionType().getValue().equals("Data not available") && this.getCoreCompetency().getValue().equals("Data not available")) {
+            return "OOPS! This job does not seem to exist.";
+        } else {
+            return "\n" +
+                    "ID: " + this.getId() + "\n" +
+                    "Name: " + this.getName() + "\n" +
+                    "Employer: " + this.getEmployer().getValue() + "\n" +
+                    "Location: " + this.getLocation().getValue() + "\n" +
+                    "Position Type: " + this.getPositionType().getValue() + "\n" +
+                    "Core Competency: " + this.getCoreCompetency().getValue() +
+                    "\n";
+        }
+    }
+
 }
